@@ -1,34 +1,43 @@
 {
   "env": {
     "browser": true,
-    "es6": true,
-    "node": true
+    "es2021": true,
+    "jest": true
   },
-  "parser": "@babel/eslint-parser",
   "extends": [
-    "eslint:recommended",
     "plugin:react/recommended",
-    "airbnb",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals",
     "plugin:prettier/recommended"
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 2018,
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "import",
+    "prettier"
+  ],
   "rules": {
-    "react/react-in-jsx-scope": 0,
-    "react/prefer-stateless-function": 0,
-    "react/jsx-filename-extension": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "no-nested-ternary": 0
+    "arrow-body-style": "error",
+    "prefer-arrow-callback": "off",
+    "no-var": "error",
+    "no-dupe-keys": "error",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "prettier/prettier": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
