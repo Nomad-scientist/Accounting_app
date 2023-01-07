@@ -1,30 +1,53 @@
-import Sequelize from 'sequelize';
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes
+} from 'sequelize';
 
-class Category extends Sequelize.Model {
-  static init(sequelize) {
-    return super.init(
-      {
-        category: {
-          type: Sequelize.STRING(50),
-          allowNull: false
-        },
-        type: {
-          type: Sequelize.STRING(50),
-          allowNull: false
-        }
-      },
-      {
-        sequelize,
-        timestamps: false,
-        underscored: false,
-        modelName: 'Category',
-        tableName: 'categorys',
-        paranoid: false,
-        charset: 'utf8',
-        collate: 'utf8_general_ci'
-      }
-    );
+import sequelize from './';
+import Income from './Income';
+import Expense from './Expense';
+
+class Category extends Model<
+  InferAttributes<Category>,
+  InferCreationAttributes<Category>
+> {}
+Category.init(
+  {
+    category: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    type: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    }
+  },
+  {
+    sequelize,
+    timestamps: false,
+    underscored: false,
+    modelName: 'Category',
+    tableName: 'categories',
+    paranoid: false,
+    charset: 'utf8',
+    collate: 'utf8_general_ci'
   }
-}
+);
 
-module.exports = Category;
+Category.hasOne(Income, {
+  foreignKey: 'category_id',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade'
+});
+
+Category.hasOne(Expense, {
+  foreignKey: 'category_id',
+  sourceKey: 'id',
+  onDelete: 'cascade',
+  onUpdate: 'cascade'
+});
+
+export default Category;

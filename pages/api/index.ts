@@ -1,15 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
-import db from '../../models';
+import sequelize from '../../models';
 
-db.sequelize
-  .sync()
-  .then(() => {
-    console.log('DB 연결 성공');
-  })
-  .catch((err: any) => {
-    console.error(err);
-  });
+const connect = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+};
+
+connect();
 
 type Data = {
   name: string;

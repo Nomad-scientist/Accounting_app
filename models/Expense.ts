@@ -5,16 +5,16 @@ import {
   InferCreationAttributes
 } from 'sequelize';
 
-import sequelize from './';
+import sequelize from '.';
 import User from './User';
 import Category from './Category';
 
-class Income extends Model<
-  InferAttributes<Income>,
-  InferCreationAttributes<Income>
+class Expense extends Model<
+  InferAttributes<Expense>,
+  InferCreationAttributes<Expense>
 > {}
 
-Income.init(
+Expense.init(
   {
     category_id: {
       type: DataTypes.INTEGER,
@@ -38,28 +38,26 @@ Income.init(
     sequelize,
     timestamps: false,
     underscored: false,
-    modelName: 'Income',
-    tableName: 'incomes',
+    modelName: 'Expense',
+    tableName: 'expenses',
     paranoid: false,
     charset: 'utf8',
     collate: 'utf8_general_ci'
   }
 );
 
-Income.belongsTo(User, {
+Expense.belongsTo(User, {
   foreignKey: 'user_id',
-  //  'sourceKey' does not exist in type 'BelongsToOptions'.
-  //sourceKey: 'id',
+  targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade'
 });
 
-Income.belongsTo(Category, {
+Expense.belongsTo(Category, {
   foreignKey: 'category_id',
-  //  'sourceKey' does not exist in type 'BelongsToOptions'.
-  //sourceKey: 'id',
+  targetKey: 'id',
   onDelete: 'cascade',
   onUpdate: 'cascade'
 });
 
-export default Income;
+export default Expense;
