@@ -6,8 +6,6 @@ import {
 } from 'sequelize';
 
 import sequelize from './';
-import Income from './Income';
-import Expense from './Expense';
 
 class Category extends Model<
   InferAttributes<Category>,
@@ -35,19 +33,5 @@ Category.init(
     collate: 'utf8_general_ci'
   }
 );
-
-Category.hasOne(Income, {
-  foreignKey: 'category_id',
-  sourceKey: 'id',
-  onDelete: 'cascade',
-  onUpdate: 'cascade'
-});
-
-Category.hasOne(Expense, {
-  foreignKey: 'category_id',
-  sourceKey: 'id',
-  onDelete: 'cascade',
-  onUpdate: 'cascade'
-});
 
 export default Category;

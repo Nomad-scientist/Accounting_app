@@ -6,8 +6,6 @@ import {
 } from 'sequelize';
 
 import sequelize from './';
-import Income from './Income';
-import Expense from './Expense';
 
 class User extends Model<
   InferAttributes<User>,
@@ -45,19 +43,5 @@ User.init(
     collate: 'utf8_general_ci'
   }
 );
-
-User.hasMany(Income, {
-  foreignKey: 'user_id',
-  sourceKey: 'id',
-  onDelete: 'cascade',
-  onUpdate: 'cascade'
-});
-
-User.hasMany(Expense, {
-  foreignKey: 'user_id',
-  sourceKey: 'id',
-  onDelete: 'cascade',
-  onUpdate: 'cascade'
-});
 
 export default User;

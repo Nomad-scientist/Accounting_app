@@ -5,9 +5,7 @@ import {
   InferCreationAttributes
 } from 'sequelize';
 
-import sequelize from '.';
-import User from './User';
-import Category from './Category';
+import sequelize from './';
 
 class Expense extends Model<
   InferAttributes<Expense>,
@@ -45,19 +43,5 @@ Expense.init(
     collate: 'utf8_general_ci'
   }
 );
-
-Expense.belongsTo(User, {
-  foreignKey: 'user_id',
-  targetKey: 'id',
-  onDelete: 'cascade',
-  onUpdate: 'cascade'
-});
-
-Expense.belongsTo(Category, {
-  foreignKey: 'category_id',
-  targetKey: 'id',
-  onDelete: 'cascade',
-  onUpdate: 'cascade'
-});
 
 export default Expense;
